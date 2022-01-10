@@ -5,9 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
-import { AuthComponent } from './auth/auth.component';
-import { AccountComponent } from './account/account.component';
-import { AvatarComponent } from './avatar/avatar.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { ProductosComponent } from './productos/productos.component';
@@ -21,9 +18,6 @@ import { LoginComponent } from './login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
-    AccountComponent,
-    AvatarComponent,
     NavbarComponent,
     HomeComponent,
     ProductosComponent,

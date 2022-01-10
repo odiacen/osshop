@@ -4,9 +4,7 @@
 
 export const environment = {
   production: false,
-  supabaseUrl: "https://agvmsjrtbvydqaevgplk.supabase.co",
-  supabaseKey: "YeyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MTY0NDg3NSwiZXhwIjoxOTU3MjIwODc1fQ.uINE9a76UW3kRDttFcSy44eYU00lzBfDbXGFVDoGFW8OUR_SUPABASE_KEY"
-};
+  };
 
 /*
  * For easier debugging in development mode, you can import the following file
