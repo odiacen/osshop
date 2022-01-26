@@ -22,6 +22,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { Nav } from './nav/nav.component';
 import { Pedidos } from './pedidos/pedidos.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { Pedidos } from './pedidos/pedidos.component';
   providers: [
     OsshopService,
     AuthGuard,
-    NgbInputDatepickerConfig
+    NgbInputDatepickerConfig,
+    Pedidos
   ],
   bootstrap: [AppComponent]
 })

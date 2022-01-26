@@ -1,0 +1,27 @@
+<p>
+  <button type="button" class="btn btn-outline-primary" (click)="rango.toggle()" [attr.aria-expanded]="!rangoCollapsed"
+    aria-controls="collapseExample">
+   Seleccione el rango de tiempo
+  </button>
+</p>
+<div #rango="ngbCollapse" [(ngbCollapse)]="rangoCollapsed">
+<form class="form-inline" [formGroup]= "pickForm">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button">Desde</button>
+      </div>
+      <input class="form-control" placeholder="yyyy-mm-dd"
+            name="dp" ngbDatepicker #p="ngbDatepicker" formControlName="init">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="p1.toggle()" type="button">Hasta</button>
+      </div>
+      <input class="form-control" placeholder="yyyy-mm-dd"
+            name="dp" ngbDatepicker #p1="ngbDatepicker" formControlName="fin">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="rango1()" type="button">Ejecutar</button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>

@@ -12,13 +12,14 @@ interface PEDIDO {
   order_status: string,
   order_date: string,
   completed_date: string,
-  billing_first_name: string,
-  billing_address: string,
+  order_currency: string,
+  user_login: string,
   billing_postcode: string,
-  billing_email: string,
-  //billing_phone: number,
-  order_subtotal: number,
-  order_total: number,
+  billing_phone: any,
+  user_email: string,
+  billing_address: string,
+  order_subtotal_minus_discount: number,
+  products: object,
   Total_Completado?: number
 }
 
@@ -34,7 +35,7 @@ export class Pedidos {
   public model: any;
   public isCollapsed = true;
   public rangoCollapsed = true;
-  pick!: NgbDateStruct; 
+  pick!: NgbDateStruct;
   page = 1;
   pageSize = 10;
   collectionSize: any;
@@ -45,8 +46,7 @@ export class Pedidos {
   comerciales = orders.map(n => n.billing_postcode).filter((value, index, self) => self.indexOf(value) === index);
   
   groupForm = new FormGroup ({
-    comercial: new FormControl(''),
-    
+    comercial: new FormControl(''),    
   });
 
   pickForm = new FormGroup ({
@@ -94,7 +94,7 @@ export class Pedidos {
     let total = 0
     for (let state in this.search1) {
       if (this.search1[state].order_status === "Completado")
-          total += this.search1[state].order_subtotal   
+          total += this.search1[state].order_subtotal_minus_discount   
         }
       return total
   }
@@ -112,10 +112,12 @@ export class Pedidos {
       }
 
       for (let z of orders){
-          let per = this.search1.filter(n => (this.from < n.completed_date) && (n.completed_date < this.to))        
-          this.search1 = per         
-       }     
+         let per = this.search1.filter(n => (this.from < n.completed_date) && (n.completed_date < this.to))        
+         this.search1 = per
+                  
+        }     
       }
+      console.log (this.from, this.to)
     this.refreshPedidos()
   }  
 
@@ -124,7 +126,7 @@ export class Pedidos {
        const y = this.groupForm.value[x]
       if (y === "")  
           this.search1 = orders
-      else { let ordercom = this.search1.filter(n => n.billing_postcode === y)
+      else { let ordercom = order.filter(n => n.billing_postcode === y)
        this.search1 = ordercom
       }
       
