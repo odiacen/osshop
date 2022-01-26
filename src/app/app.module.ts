@@ -1,9 +1,13 @@
+import { AuthGuard} from './auth-guard.service';
+import { OsshopService } from './osshop.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { NgbInputDatepickerConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
@@ -14,6 +18,9 @@ import { OkpedidosComponent } from './okpedidos/okpedidos.component';
 import { AdproductosComponent } from './admin/adproductos/adproductos.component';
 import { AdpedidosComponent } from './admin/adpedidos/adpedidos.component';
 import { LoginComponent } from './login/login.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { Nav } from './nav/nav.component';
+import { Pedidos } from './pedidos/pedidos.component';
 
 @NgModule({
   declarations: [
@@ -26,24 +33,36 @@ import { LoginComponent } from './login/login.component';
     OkpedidosComponent,
     AdproductosComponent,
     AdpedidosComponent,
-    LoginComponent
+    LoginComponent,
+    ProductFormComponent,
+    Nav,
+    Pedidos
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    ReactiveFormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent},
-      {path: 'productos', component:ProductosComponent},
+      {path: 'productos', component:ProductosComponent, canActivate: [AuthGuard]},
       {path: 'carrito', component:CarritoComponent},
-      {path: 'facturacion', component:FacturacionComponent},
-      {path: 'okpedidos', component:OkpedidosComponent},
       {path: 'login', component:LoginComponent},
-      {path: 'admin/adproductos', component:AdproductosComponent},
-      {path: 'admin/adpedidos', component:AdpedidosComponent}
+
+      {path: 'facturacion', component:FacturacionComponent, canActivate: [AuthGuard]},
+      {path: 'okpedidos', component:OkpedidosComponent, canActivate: [AuthGuard]},
+      
+      {path: 'admin/adproductos', component:AdproductosComponent, canActivate: [AuthGuard]},
+      {path: 'admin/product/new', component:ProductFormComponent, canActivate: [AuthGuard]},
+      {path: 'admin/adpedidos', component:AdpedidosComponent, canActivate: [AuthGuard]}
     ])
   ],
-  providers: [],
+  providers: [
+    OsshopService,
+    AuthGuard,
+    NgbInputDatepickerConfig
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

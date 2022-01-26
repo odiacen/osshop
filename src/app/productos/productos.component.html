@@ -1,1 +1,25 @@
-<p>productos works!</p>
+<p>productos</p>
+<button (click)="showBirds()">Test</button>
+<div class="container mt-5">
+  
+    <h2>Angular Display Data from Json File Example</h2>
+    
+    <table class="table table-striped">
+      <thead>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>ScientificName</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bird of Birds">
+          <td>{{ bird.ID }}</td>
+          <td>{{ bird.Name }}</td>
+          <td>{{ bird.Type }}</td>
+          <td>{{ bird.ScientificName }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

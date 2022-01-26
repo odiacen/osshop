@@ -1,0 +1,68 @@
+<p>
+  <button type="button" class="btn btn-outline-primary" (click)="rango.toggle()" [attr.aria-expanded]="!rangoCollapsed"
+    aria-controls="collapseExample">
+   Seleccione el rango de tiempo
+  </button>
+</p>
+<div #rango="ngbCollapse" [(ngbCollapse)]="rangoCollapsed">
+<form class="form-inline" [formGroup]= "pickForm">
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="p.toggle()" type="button">Desde</button>
+      </div>
+      <input class="form-control" placeholder="yyyy-mm-dd"
+            name="dp" ngbDatepicker #p="ngbDatepicker" formControlName="init">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="p1.toggle()" type="button">Hasta</button>
+      </div>
+      <input class="form-control" placeholder="yyyy-mm-dd"
+            name="dp" ngbDatepicker #p1="ngbDatepicker" formControlName="fin">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="rango1()" type="button">Ejecutar</button>
+      </div>
+    </div>
+  </div>
+</form>
+</div>
+
+<label for="typeahead-config">Total de pedidos completados:</label>${{ total() }}
+<table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">Pedido</th>
+      <th scope="col" (click)="test()">Estado</th>
+      <th scope="col" (click)="orderDate()">Fecha Completado</th>
+      <th scope="col">Subtotal Pedido</th>
+      <th id="comercial" class="dropdown-toggle" (click)="collapse.toggle()" [attr.aria-expanded]="!isCollapsed" scope="col">Comercial</th>
+      <div #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
+        <form [formGroup]= "groupForm">
+          <select (click)="ordercom()" id="comerciales" formControlName="comercial">
+          <option value=""></option>
+          <option *ngFor="let c of comerciales" >{{c}}</option>
+          </select>
+        </form>
+      </div>
+          
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let country of pedido">
+      <th scope="row">{{ country.order_number }}</th>
+      <td>{{ country.order_status }}</td>
+      <td>{{ country.completed_date}}</td>
+      <td>{{ country.order_subtotal }}</td>
+      <td>{{ country.billing_postcode }}</td>
+    </tr >
+    
+    </tbody>
+    
+  </table>
+  
+  <div class="d-flex justify-content-between p-2">
+    <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshPedidos()">
+    </ngb-pagination>
+  
+    
+  </div>
+

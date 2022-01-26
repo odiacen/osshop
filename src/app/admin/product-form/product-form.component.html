@@ -1,0 +1,29 @@
+<form [formGroup]= "groupForm">
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title">
+    </div>
+    
+    <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+            <span class="input-group-addon">$</span>
+            <input id="price" type="number" formControlName="price">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category</label>
+        <select (click)="test()" id="category" formControlName="category">
+        <option value=""></option>
+        <option *ngFor="let c of category" >{{c}}</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="imageUrl">Image Url</label>
+        <input id="imageUrl" type="text" formControlName="imageUrl">
+    </div>    
+</form>
+
+<button (click)="CreateProductos()" class="btn btn-primary">Save</button>
